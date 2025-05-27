@@ -1,0 +1,35 @@
+.connected-users {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    margin: 5px;
+    padding: 7px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    overflow: hidden;
+}
+
+.user:hover {
+    font-size: 10px;
+    border-radius: 50%;
+    width: auto;
+}
+
+.user-initial {
+    mix-blend-mode: difference;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

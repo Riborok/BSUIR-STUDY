@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+	<!-- annotation driving configuration -->
+	<mvc:annotation-driven />
+	<context:annotation-config />
+	<context:spring-configured />
+	<context:component-scan
+		base-package="edu.epam.fop.presentation.web.controllers" />
+
+	<!-- FIXME: Insert Thymeleaf view resolver configuation  -->
+	<!-- Thymeleaf View Resolver -->
+	<bean id="templateResolver" class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver">
+		<property name="prefix" value="/WEB-INF/templates/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML" />
+		<property name="characterEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="templateEngine" class="org.thymeleaf.spring6.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+		<property name="enableSpringELCompiler" value="true" />
+	</bean>
+
+	<bean class="org.thymeleaf.spring6.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		<property name="characterEncoding" value="UTF-8" />
+	</bean>
+
+
+	<!-- resources exclusions from servlet mapping -->
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/img/**" location="/img/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+
+</beans>

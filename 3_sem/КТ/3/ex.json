@@ -1,0 +1,11 @@
+{
+  "name": "John Doe",
+  "age": 30,
+  "isStudent": false,
+  "grades": [95, 88, 75],
+  "address": {
+    "city": "New York",
+    "zipCode": "10001"
+  },
+  "marks": [A, "C", "X"]
+}

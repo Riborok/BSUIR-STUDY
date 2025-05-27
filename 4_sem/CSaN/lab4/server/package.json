@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.3.3",
+    "randomcolor": "^0.6.2",
+    "socket.io": "^4.7.5",
+    "unique-names-generator": "^4.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

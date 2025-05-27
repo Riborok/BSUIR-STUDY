@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.097,C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\B\ProjectB.dproj=C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\C\ProjectC.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.959,C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\A\ProjectA.dproj=C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\B\ProjectB.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.561,C:\Users\Egor\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\A\ProjectA.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.907,C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\C\ProjectC.dproj=C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\D\ProjectD.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.246,C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\D\ProjectD.dproj=C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\E\ProjectE.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.568,C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\E\ProjectE.dproj=C:\Users\Egor\Desktop\Егор\Проекты\Цепные дроби\F\ProjectF.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

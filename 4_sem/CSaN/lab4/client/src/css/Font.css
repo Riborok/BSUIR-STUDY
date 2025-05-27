@@ -1,0 +1,59 @@
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='verdana']::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='verdana']::before {
+    content: 'Verdana';
+    font-family: 'Verdana', serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='times-new-roman']::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='times-new-roman']::before {
+    content: 'TNR';
+    font-family: 'Times New Roman', serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='arial']::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='arial']::before {
+    content: 'Arial';
+    font-family: 'Arial', sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='tahoma']::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='tahoma']::before {
+    content: 'Tahoma';
+    font-family: 'Tahoma', sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='helvetica']::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='helvetica']::before {
+    content: 'Helvetica';
+    font-family: 'Helvetica', sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value='sans-serif']::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value='sans-serif']::before {
+    content: 'Sans-serif';
+    font-family: 'sans-serif';
+}
+
+.ql-font-verdana {
+    font-family: 'Verdana', serif;
+}
+
+.ql-font-times-new-roman {
+    font-family: 'Times New Roman', serif;
+}
+
+.ql-font-arial {
+    font-family: 'Arial', serif;
+}
+
+.ql-font-tahoma {
+    font-family: 'Tahoma', serif;
+}
+
+.ql-font-helvetica {
+    font-family: 'Helvetica', serif;
+}
+
+.ql-font-sans-serif {
+    font-family: 'sans-serif';
+}

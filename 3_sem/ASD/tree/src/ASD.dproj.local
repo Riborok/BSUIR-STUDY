@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.686,C:\Users\user\Pictures\АиСД\src\Firmware.pas=C:\Users\user\Pictures\АиСД\src\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.377,C:\Users\user\Pictures\АиСД\Project1.dproj=C:\Users\user\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.197,C:\Users\user\Pictures\АиСД\Project1.dproj=C:\Users\user\Pictures\АиСД\ASD.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.753,C:\Users\user\Pictures\АиСД\BinaryTree.pas=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.639,C:\Users\user\Pictures\АиСД\Main.dfm=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.154,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.443,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.639,C:\Users\user\Pictures\АиСД\Main.pas=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.795,=C:\Users\user\Pictures\АиСД\src\Unit1.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Main.pas"/>
+    <File Path="Main.dfm"/>
+    <File Path="BinaryTree.pas"/>
+    <File Path="Firmware.pas"/>
+  </ProjectSortOrder>
+</BorlandProject>

@@ -1,0 +1,15 @@
+﻿.card {
+    border-radius: 15px;
+}
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #eaeaea;
+    padding: 15px;
+    transition: background-color 0.2s;
+}
+.list-group-item:last-child {
+    border-bottom: none;
+}
+.list-group-item:hover {
+    background-color: #dcdcdf;
+}
