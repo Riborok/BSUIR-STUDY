@@ -1,0 +1,9 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../lab_4.srcs/sources_1/new/FDCE_trigger.vhd" \
+"../../../../lab_4.srcs/sources_1/new/SREGn_beh.vhd" \
+"../../../../lab_4.srcs/sources_1/new/SREGn_struct.vhd" \
+"../../../../lab_4.srcs/sim_2/new/tb_SREGn.vhd" \
+
+# Do not sort compile order
+nosort

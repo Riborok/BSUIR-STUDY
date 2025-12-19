@@ -1,0 +1,26 @@
+car_ID — числовой (int) — идентификатор (служебный).
+symboling — числовой (int) — индекс риска (от -3 до +3).
+CarName — строка (object) — название авто (марка + модель).
+fueltype — категориальный (object) — тип топлива (gas, diesel).
+aspiration — категориальный (object) — подача воздуха (std, turbo).
+doornumber — категориальный (object, текст "two"/"four") → по сути числовой.
+carbody — категориальный (object) — тип кузова.
+drivewheel — категориальный (object) — привод (fwd, rwd, 4wd).
+enginelocation — категориальный (object) — расположение двигателя.
+wheelbase — числовой (float) — колесная база.
+carlength — числовой (float) — длина.
+carwidth — числовой (float) — ширина.
+carheight — числовой (float) — высота.
+curbweight — числовой (int) — масса без нагрузки.
+enginetype — категориальный (object) — тип двигателя.
+cylindernumber — категориальный (object, текст "four", "six") → по сути числовой.
+enginesize — числовой (int) — объём двигателя.
+fuelsystem — категориальный (object) — топливная система.
+boreratio — числовой (float) — диаметр цилиндра.
+stroke — числовой (float) — ход поршня.
+compressionratio — числовой (float) — степень сжатия.
+horsepower — числовой (int) — мощность.
+peakrpm — числовой (int) — максимальные обороты.
+citympg — числовой (int) — расход в городе (миль/галлон).
+highwaympg — числовой (int) — расход на трассе.
+price — числовой (int, целевая переменная) — цена.

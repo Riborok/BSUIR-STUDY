@@ -1,0 +1,28 @@
+0.6
+2018.2
+Jun 14 2018
+20:41:02
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sim_1/new/TestSchema.vhd,1762094870,vhdl,,,,testschema,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sim_1/new/async_reg_test.vhd,1762075309,vhdl,,,,async_reg_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sim_1/new/johnson_count_test.vhd,1762077931,vhdl,,,,johnson_count_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sim_1/new/lfsr_ext_test.vhd,1762093414,vhdl,,,,lfsr_ext_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sim_1/new/lfsr_int_test.vhd,1762174124,vhdl,,,,lfsr_int_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sim_1/new/lfsr_w_2_dir_test.vhd,1762177641,vhdl,,,,lfsr_w_2_dir_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sim_1/new/shift_reg_test.vhd,1762077036,vhdl,,,,shift_reg_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sim_1/new/signature_test.vhd,1762177427,vhdl,,,,signature_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sim_1/new/sync_reg_test.vhd,1762075308,vhdl,,,,sync_reg_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/async_reg_beh.vhd,1762075217,vhdl,,,,async_reg_beh,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/async_reg_struct.vhd,1762075219,vhdl,,,,async_reg_struct,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/combination.vhd,1762083990,vhdl,,,,combination,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/d_latch_en.vhd,1762073568,vhdl,,,,d_latch_en,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/d_trigger_ce.vhd,1762076071,vhdl,,,,d_trigger_ce,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/d_trigger_en.vhd,1762073566,vhdl,,,,d_trigger_en,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/johnson_count.vhd,1762084289,vhdl,,,,johnson_count,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/lfsr_ext.vhd,1762093370,vhdl,,,,lfsr_ext,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/lfsr_int.vhd,1762093536,vhdl,,,,lfsr_int,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/lfsr_w_2_dir.vhd,1762182591,vhdl,,,,lfsr_w_2_dir,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/shift_reg_beh.vhd,1762075927,vhdl,,,,shift_reg_beh,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/shift_reg_struct.vhd,1762076320,vhdl,,,,shift_reg_struct,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/signature_analyzer.vhd,1762093943,vhdl,,,,signature_analyzer,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/sync_reg_struct.vhd,1762075218,vhdl,,,,sync_reg_struct,,,,,,,,
+D:/XC/4th kurs/POCP/Lab4/Lab4.srcs/sources_1/new/sync_req_beh.vhd,1762075216,vhdl,,,,sync_reg_beh,,,,,,,,

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Mon Nov 10 17:26:51 2025
+# Process ID: 9400
+# Current directory: D:/Unik/7_sem/POCP/lab_4/lab_4.sim/sim_5/behav/xsim
+# Command line: wbtcv.exe -mode batch -source D:/Unik/7_sem/POCP/lab_4/lab_4.sim/sim_5/behav/xsim/xsim.dir/lfsr_int_test_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: D:/Unik/7_sem/POCP/lab_4/lab_4.sim/sim_5/behav/xsim/webtalk.log
+# Journal file: D:/Unik/7_sem/POCP/lab_4/lab_4.sim/sim_5/behav/xsim\webtalk.jou
+#-----------------------------------------------------------
+source D:/Unik/7_sem/POCP/lab_4/lab_4.sim/sim_5/behav/xsim/xsim.dir/lfsr_int_test_behav/webtalk/xsim_webtalk.tcl -notrace

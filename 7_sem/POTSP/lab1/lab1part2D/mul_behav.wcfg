@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="mul_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="mul" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="136000001fs"></ZoomEndTime>
+      <Cursor1Time time="1000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="175"></NameColumnWidth>
+      <ValueColumnWidth column_width="146"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="7" />
+   <wvobject fp_name="/mul/A1" type="logic">
+      <obj_property name="ElementShortName">A1</obj_property>
+      <obj_property name="ObjectShortName">A1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mul/A2" type="logic">
+      <obj_property name="ElementShortName">A2</obj_property>
+      <obj_property name="ObjectShortName">A2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mul/B1" type="logic">
+      <obj_property name="ElementShortName">B1</obj_property>
+      <obj_property name="ObjectShortName">B1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mul/B2" type="logic">
+      <obj_property name="ElementShortName">B2</obj_property>
+      <obj_property name="ObjectShortName">B2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mul/S" type="logic">
+      <obj_property name="ElementShortName">S</obj_property>
+      <obj_property name="ObjectShortName">S</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mul/Q1" type="logic">
+      <obj_property name="ElementShortName">Q1</obj_property>
+      <obj_property name="ObjectShortName">Q1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mul/Q2" type="logic">
+      <obj_property name="ElementShortName">Q2</obj_property>
+      <obj_property name="ObjectShortName">Q2</obj_property>
+   </wvobject>
+</wave_config>

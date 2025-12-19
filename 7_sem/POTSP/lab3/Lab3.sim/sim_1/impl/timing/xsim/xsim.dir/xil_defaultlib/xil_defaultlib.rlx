@@ -1,0 +1,11 @@
+0.6
+2018.2
+Jun 14 2018
+20:41:02
+D:/XC/4th kurs/POCP/Lab3/Lab3.sim/sim_1/impl/timing/xsim/RS_beh_Test_time_impl.v,1760287712,verilog,,,,RS_beh;glbl,,,,,,,,
+D:/XC/4th kurs/POCP/Lab3/Lab3.srcs/sim_1/new/RS_Test.vhd,1760286830,vhdl,,,,rs_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab3/Lab3.srcs/sim_1/new/RS_beh_Test.vhd,1760287693,vhdl,,,,rs_beh_test,,,,,,,,
+D:/XC/4th kurs/POCP/Lab3/Lab3.srcs/sources_1/new/RS_struct.vhd,1760270991,vhdl,,,,rs_struct,,,,,,,,
+D:/XC/4th kurs/POCP/Lab3/Lab3.srcs/sources_1/new/nor2_gate.vhd,1760269747,vhdl,,,,nor2_gate,,,,,,,,
+D:/XC/4th kurs/POCP/Lab3/Lab3.srcs/sources_1/new/not_gate.vhd,1760269745,vhdl,,,,not_gate,,,,,,,,
+D:/XC/4th kurs/POCP/Lab3/Lab3.srcs/sources_1/new/or2_gate.vhd,1760269742,vhdl,,,,or2_gate,,,,,,,,

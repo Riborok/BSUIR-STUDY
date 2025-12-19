@@ -1,0 +1,1 @@
+-wto "fbddd42000e741958393393fd9b26cb6" --incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "johnson_count_test_behav" "xil_defaultlib.johnson_count_test" -log "elaborate.log" 

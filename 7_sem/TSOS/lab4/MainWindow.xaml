@@ -1,0 +1,73 @@
+﻿<Window x:Class="Lab_4_CSHARP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Image Correlation" Height="650" Width="1100">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>   <!-- Верхняя панель -->
+            <RowDefinition Height="*"/>     <!-- Изображения -->
+        </Grid.RowDefinitions>
+
+
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+        <StackPanel Orientation="Horizontal" Margin="0" VerticalAlignment="Top">
+
+            <!-- Загрузка исходного изображения -->
+            <Button x:Name="BtnLoadSrc"
+                    Content="Выбрать изображение"
+                    Width="150"
+                    Margin="0,0,15,0"
+                    Click="BtnLoadSrc_Click"/>
+
+            <!-- Генерация случайного фрагмента -->
+            <Button x:Name="BtnRandomFragment"
+                    Content="Случайный фрагмент"
+                    Width="150"
+                    Margin="0,0,15,0"
+                    Click="BtnRandomFragment_Click"/>
+
+            <!-- Выполнить взаимную корреляцию -->
+            <Button x:Name="BtnCrossCorr"
+                    Content="Взаимная корреляция"
+                    Width="170"
+                    Margin="0,0,15,0"
+                    Click="BtnCrossCorr_Click"/>
+
+            <!-- Выполнить автокорреляцию -->
+            <Button x:Name="BtnAutoCorr"
+                    Content="Автокорреляция"
+                    Width="150"
+                    Margin="0,0,15,0"
+                    Click="BtnAutoCorr_Click"/>
+
+        </StackPanel>
+
+
+
+        <!-- НИЖНИЙ БЛОК С ИЗОБРАЖЕНИЯМИ -->
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Исходное изображение -->
+            <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+                <Image x:Name="ImgSource" Stretch="Uniform"/>
+            </Border>
+
+            <!-- Фрагмент -->
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="5">
+                <Image x:Name="ImgFragment" Stretch="Uniform"/>
+            </Border>
+
+            <!-- Картинка корреляции -->
+            <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1" Margin="5">
+                <Image x:Name="ImgCorrelation" Stretch="Uniform"/>
+            </Border>
+        </Grid>
+
+    </Grid>
+</Window>

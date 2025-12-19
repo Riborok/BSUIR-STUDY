@@ -1,0 +1,12 @@
+
+{ 
+    crc :  3874518098613651204  , 
+    ccp_crc :  0  , 
+    cmdline : " -wto 58b1bf521c7e4dd59233be0a69c43cac --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot bistabTest_behav xil_defaultlib.bistabTest" , 
+    buildDate : "Jun 14 2018" , 
+    buildTime : "20:41:02" , 
+    linkCmd : "D:\\XilinxVivado\\Vivado\\2018.2\\data\\..\\tps\\mingw\\6.2.0\\win64.o\\nt\\bin\\gcc.exe -Wa,-W  -O -Wl,--stack,104857600 -o \"xsim.dir/bistabTest_behav/xsimk.exe\"   \"xsim.dir/bistabTest_behav/obj/xsim_0.win64.obj\" \"xsim.dir/bistabTest_behav/obj/xsim_1.win64.obj\" \"D:\\XilinxVivado\\Vivado\\2018.2\\lib\\win64.o\\\\librdi_simulator_kernel.dll\"  \"D:\\XilinxVivado\\Vivado\\2018.2\\lib\\win64.o\\\\librdi_simbridge_kernel.dll\"" , 
+    aggregate_nets : 
+    [ 
+    ] 
+} 

@@ -1,0 +1,12 @@
+Animal ID — строка (object) — уникальный идентификатор животного.
+Name — строка (object) — имя животного, может быть пустым.
+DateTime — строка/дата-время (object/datetime) — дата и время поступления животного.
+MonthYear — строка/дата-время (object/datetime) — дата поступления без точного времени (иногда совпадает с DateTime).
+Found Location — строка (object) — место, где животное было найдено.
+Intake Type — категориальный (object) — способ поступления (например, Stray, Owner Surrender).
+Intake Condition — категориальный (object) — состояние при поступлении (Normal, Sick, Injured и др.).
+Animal Type — категориальный (object) — вид животного (Dog, Cat и др.).
+Sex upon Intake — категориальный (object) — пол и стерилизация/кастрация (Neutered Male, Spayed Female, Intact Male/Female).
+Age upon Intake — строка/числовой (object, может быть преобразован в числовой) — возраст животного при поступлении (например, "2 years", "11 months", "4 weeks").
+Breed — строка (object) — порода животного, может быть смешанной (Mix).
+Color — строка (object) — окраска животного, может быть несколько цветов (Tricolor, White/Liver).

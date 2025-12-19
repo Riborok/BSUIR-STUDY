@@ -1,0 +1,14 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../lab_2_fixed.srcs/sources_1/new/and_2.vhd" \
+"../../../../lab_2_fixed.srcs/sources_1/new/and_3.vhd" \
+"../../../../lab_2_fixed.srcs/sources_1/new/inv.vhd" \
+"../../../../lab_2_fixed.srcs/sources_1/new/or_2.vhd" \
+"../../../../lab_2_fixed.srcs/sources_1/new/or_3.vhd" \
+"../../../../lab_2_fixed.srcs/sources_1/new/sum_1_struct.vhd" \
+"../../../../lab_2_fixed.srcs/sources_1/new/sum_2_beh.vhd" \
+"../../../../lab_2_fixed.srcs/sources_1/new/sum_2_struct.vhd" \
+"../../../../lab_2_fixed.srcs/sim_task_4/new/tb_sum_2.vhd" \
+
+# Do not sort compile order
+nosort

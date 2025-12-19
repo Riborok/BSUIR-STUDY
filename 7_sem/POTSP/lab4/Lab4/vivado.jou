@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Sat Nov 15 21:03:29 2025
+# Process ID: 21092
+# Current directory: D:/Desktop/Studies/7_sem/POTSP/Lab4/lab_4_full/Lab4
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent21464 D:\Desktop\Studies\7_sem\POTSP\Lab4\lab_4_full\Lab4\Lab4.xpr
+# Log file: D:/Desktop/Studies/7_sem/POTSP/Lab4/lab_4_full/Lab4/vivado.log
+# Journal file: D:/Desktop/Studies/7_sem/POTSP/Lab4/lab_4_full/Lab4\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Desktop/Studies/7_sem/POTSP/Lab4/lab_4_full/Lab4/Lab4.xpr
+update_compile_order -fileset sources_1
