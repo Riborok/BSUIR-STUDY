@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Симуляция работы АЗС</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .controls button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        #playBtn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        #pauseBtn {
+            background: #ff9800;
+            color: white;
+        }
+
+        #resetBtn {
+            background: #f44336;
+            color: white;
+        }
+
+        #stepBackBtn {
+            background: #9c27b0;
+            color: white;
+        }
+
+        #stepForwardBtn {
+            background: #3f51b5;
+            color: white;
+        }
+
+        #speedBtn {
+            background: #2196F3;
+            color: white;
+        }
+
+        #realtimeBtn {
+            background: #00bcd4;
+            color: white;
+        }
+
+        #realtimeBtn.active {
+            background: #ff5722;
+        }
+
+        .info-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .info-box h3 {
+            font-size: 14px;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .info-box .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .station-layout {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .side {
+            flex: 1;
+        }
+
+        .side-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .columns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .column {
+            background: white;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 120px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .column-name {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+            font-size: 16px;
+        }
+
+        .slot {
+            background: #f9f9f9;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .slot.occupied {
+            background: #e3f2fd;
+            border-color: #2196F3;
+            border-style: solid;
+        }
+
+        .slot.service {
+            background: #fff3e0;
+            border-color: #ff9800;
+        }
+
+        .slot.service.occupied {
+            background: #ffe0b2;
+            border-color: #ff9800;
+            border-style: solid;
+        }
+
+        .car {
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .car-volume {
+            font-size: 10px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .car-status {
+            font-size: 14px;
+            color: #999;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .event-log {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .event-log::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .event-log::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+
+        .event-log::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .event-log::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 20px;
+            height: 900px;
+        }
+
+        .left-section {
+            flex: 1;
+            min-width: 0;
+            height: 100%;
+        }
+
+        .left-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .left-section::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+
+        .left-section::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .left-section::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+
+        .right-section {
+            width: 400px;
+            flex-shrink: 0;
+            height: 100%;
+        }
+
+        .event-log h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .event-item {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+            font-size: 14px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .event-time {
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 10px;
+        }
+
+        .queue-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .queue-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+
+        .queue-cars {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            min-height: 50px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .queue-car {
+            background: #ffeb3b;
+            border: 2px solid #fbc02d;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .operator-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .operator-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+
+        .operator-status {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .operator-box {
+            background: #e8f5e9;
+            border: 3px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .operator-box.busy {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .operator-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .operator-car {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .global-queue-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .global-queue-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+
+        .global-queue-cars {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            min-height: 50px;
+            padding: 15px;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-radius: 8px;
+            border: 2px solid #ff9800;
+        }
+
+        .global-queue-car {
+            background: #ff9800;
+            border: 2px solid #f57c00;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .global-queue-car .car-side {
+            font-size: 10px;
+            background: rgba(255,255,255,0.3);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 Симуляция работы АЗС</h1>
+        <p class="subtitle">Визуализация событий из трейс-файла</p>
+
+        <div class="controls">
+            <button id="playBtn">▶ Воспроизвести</button>
+            <button id="pauseBtn">⏸ Пауза</button>
+            <button id="resetBtn">↻ Сброс</button>
+            <button id="stepBackBtn">◀ Шаг назад</button>
+            <button id="stepForwardBtn">Шаг вперёд ▶</button>
+            <button id="speedBtn">⚡ Скорость: 1x</button>
+            <button id="realtimeBtn">⏱ Режим: События</button>
+            <div class="speed-indicator" id="speedIndicator">Скорость: 1x</div>
+        </div>
+
+        <div class="info-panel">
+            <div class="info-box">
+                <h3>Текущее время</h3>
+                <div class="value" id="currentTime">0.0 с</div>
+            </div>
+            <div class="info-box">
+                <h3>Обработано машин</h3>
+                <div class="value" id="carsProcessed">0</div>
+            </div>
+            <div class="info-box">
+                <h3>Машин в очереди</h3>
+                <div class="value" id="queueLength">0</div>
+            </div>
+            <div class="info-box">
+                <h3>Всего событий</h3>
+                <div class="value" id="totalEvents">0</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="left-section">
+                <div class="station-layout">
+                    <div class="side">
+                        <div class="side-title">← Левая сторона (L)</div>
+                        <div class="columns" id="leftColumns"></div>
+                    </div>
+                    <div class="side">
+                        <div class="side-title">Правая сторона (R) →</div>
+                        <div class="columns" id="rightColumns"></div>
+                    </div>
+                </div>
+
+                <div class="operator-section">
+                    <h3>👤 Оператор (Прием оплаты)</h3>
+                    <div class="operator-status">
+                        <div class="operator-box" id="operatorBox">
+                            <div class="operator-label">Статус</div>
+                            <div class="operator-car" id="operatorCar">Свободен</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="global-queue-section">
+                    <h3>🌐 Глобальная очередь</h3>
+                    <div class="global-queue-cars" id="globalQueueCars">
+                        <div style="color: #999; font-style: italic;">Очередь пуста</div>
+                    </div>
+                </div>
+
+                <div class="queue-section">
+                    <h3>📋 Очередь на оплату</h3>
+                    <div class="queue-cars" id="queueCars">
+                        <div style="color: #999; font-style: italic;">Очередь пуста</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="event-log">
+                    <h3>📝 Журнал событий</h3>
+                    <div id="eventList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Parse trace file
+        const traceData = `/*__TRACE_DATA__*/`;
+
+        // Parse events from trace file
+        function parseTraceFile(data) {
+    const lines = data.trim().split('\n');
+    const events = [];
+
+    lines.forEach(line => {
+        const match = line.match(/^([\d.]+):\s+(.+)$/);
+        if (match) {
+            const time = parseFloat(match[1]);
+            const description = match[2];
+
+            let type = 'INFO';
+            let carId = null;
+            let column = null;
+            let slot = null;
+            let volume = null;
+            let side = null;
+            let slotFrom = null;
+            let slotTo = null;
+
+            // Сначала детектим MOVE (важно: раньше, чем общий '->')
+            if (description.includes('MOVE')) {
+                type = 'MOVE';
+                // Пример строки:
+                // "MOVE local car14 slot1->slot2 on col0"
+                const carMatch = description.match(/car(\d+)/);
+                const slotsMatch = description.match(/slot(\d+)\s*->\s*slot(\d+)/);
+                const colMatch = description.match(/col(\d+)/i); // 'col0' в MOVE
+                if (carMatch) carId = parseInt(carMatch[1]);
+                if (slotsMatch) {
+                    slotFrom = parseInt(slotsMatch[1]);
+                    slotTo = parseInt(slotsMatch[2]);
+                }
+                if (colMatch) column = parseInt(colMatch[1]);
+            }
+            // TRANSFER_GLOBAL (например: "TRANSFER_GLOBAL car28 -> col0 slot0")
+            else if (description.includes('TRANSFER_GLOBAL')) {
+                type = 'TRANSFER_GLOBAL';
+                const carMatch = description.match(/car(\d+)/);
+                const colMatch = description.match(/col(\d+)/);
+                const slotMatch = description.match(/slot(\d+)/);
+                if (carMatch) carId = parseInt(carMatch[1]);
+                if (colMatch) column = parseInt(colMatch[1]);
+                if (slotMatch) slot = parseInt(slotMatch[1]);
+            }
+            // GLOBAL_QUEUE (например: "car18 -> GLOBAL_QUEUE (len=1)")
+            else if (description.includes('GLOBAL_QUEUE')) {
+                type = 'GLOBAL_QUEUE';
+                const carMatch = description.match(/car(\d+)/);
+                if (carMatch) carId = parseInt(carMatch[1]);
+            }
+            // ASSIGN (например: "car0 -> Column3 slot2")
+            else if (description.includes('->')) {
+                type = 'ASSIGN';
+                const carMatch = description.match(/car(\d+)/);
+                const colMatch = description.match(/Column(\d+)/);
+                const slotMatch = description.match(/slot(\d+)/);
+                if (carMatch) carId = parseInt(carMatch[1]);
+                if (colMatch) column = parseInt(colMatch[1]);
+                if (slotMatch) slot = parseInt(slotMatch[1]);
+            } else if (description.includes('ARRIVAL')) {
+                type = 'ARRIVAL';
+                const carMatch = description.match(/car(\d+)/);
+                const sideMatch = description.match(/side=([LR])/);
+                const volMatch = description.match(/vol=([\d.]+)/);
+                if (carMatch) carId = parseInt(carMatch[1]);
+                if (sideMatch) side = sideMatch[1];
+                if (volMatch) volume = parseFloat(volMatch[1]);
+            } else if (description.includes('START_PAYMENT')) {
+                type = 'START_PAYMENT';
+                const carMatch = description.match(/car(\d+)/);
+                if (carMatch) carId = parseInt(carMatch[1]);
+            } else if (description.includes('END_PAYMENT')) {
+                type = 'END_PAYMENT';
+                const carMatch = description.match(/car(\d+)/);
+                if (carMatch) carId = parseInt(carMatch[1]);
+            } else if (description.includes('START_FUEL')) {
+                type = 'START_FUEL';
+                const carMatch = description.match(/car(\d+)/);
+                const colMatch = description.match(/col(\d+)/);
+                const volMatch = description.match(/vol=([\d.]+)/);
+                if (carMatch) carId = parseInt(carMatch[1]);
+                if (colMatch) column = parseInt(colMatch[1]);
+                if (volMatch) volume = parseFloat(volMatch[1]);
+            } else if (description.includes('END_FUEL')) {
+                type = 'END_FUEL';
+                const carMatch = description.match(/car(\d+)/);
+                if (carMatch) carId = parseInt(carMatch[1]);
+            } else if (description.includes('queued for OPERATOR')) {
+                type = 'QUEUE';
+                const carMatch = description.match(/car(\d+)/);
+                if (carMatch) carId = parseInt(carMatch[1]);
+            } else if (description.includes('SIM_END')) {
+                type = 'SIM_END';
+            }
+
+            events.push({
+                time,
+                type,
+                description,
+                carId,
+                column,
+                slot,
+                slotFrom,
+                slotTo,
+                volume,
+                side
+            });
+        }
+    });
+
+    return events;
+}
+
+        const events = parseTraceFile(traceData);
+
+        // State management
+        const state = {
+            columns: [
+                { id: 0, side: 'L', slots: [null, null, null] },
+                { id: 1, side: 'L', slots: [null, null, null] },
+                { id: 2, side: 'L', slots: [null, null, null] },
+                { id: 3, side: 'R', slots: [null, null, null] },
+                { id: 4, side: 'R', slots: [null, null, null] },
+                { id: 5, side: 'R', slots: [null, null, null] }
+            ],
+            cars: {},
+            globalQueue: [],  // Глобальная очередь машин
+            paymentQueue: [],  // Очередь на оплату к оператору
+            operator: null,
+            currentEventIndex: 0,
+            isPlaying: false,
+            speed: 1,
+            carsProcessed: 0,
+            realtimeMode: false,  // Режим реального времени
+            currentSimTime: 0,     // Текущее время симуляции
+            lastRealTime: null     // Последняя отметка реального времени
+        };
+
+        let animationTimer = null;
+        let realtimeTimer = null;
+
+        // Initialize UI
+        function initializeUI() {
+            // Create columns
+            const leftColumns = document.getElementById('leftColumns');
+            const rightColumns = document.getElementById('rightColumns');
+
+            state.columns.forEach(col => {
+                const colDiv = document.createElement('div');
+                colDiv.className = 'column';
+                colDiv.id = `column${col.id}`;
+
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'column-name';
+                nameDiv.textContent = `Колонка ${col.id}`;
+                colDiv.appendChild(nameDiv);
+
+                for (let i = 0; i < 3; i++) {
+                    const slotDiv = document.createElement('div');
+                    slotDiv.className = 'slot' + (i === 2 ? ' service' : '');
+                    slotDiv.id = `col${col.id}slot${i}`;
+                    slotDiv.innerHTML = i === 2 ? '<span style="color: #999;">Обслуживание</span>' : '<span style="color: #999;">Пусто</span>';
+                    colDiv.appendChild(slotDiv);
+                }
+
+                if (col.side === 'L') {
+                    leftColumns.appendChild(colDiv);
+                } else {
+                    rightColumns.appendChild(colDiv);
+                }
+            });
+
+            document.getElementById('totalEvents').textContent = events.length;
+        }
+
+        // Update UI
+        function updateUI() {
+            // Update columns
+            state.columns.forEach(col => {
+                col.slots.forEach((carId, slotIdx) => {
+                    const slotDiv = document.getElementById(`col${col.id}slot${slotIdx}`);
+                    if (carId !== null && state.cars[carId]) {
+                        const car = state.cars[carId];
+                        slotDiv.className = 'slot' + (slotIdx === 2 ? ' service' : '') + ' occupied';
+                        slotDiv.innerHTML = `
+                            <div class="car">🚗 car${carId}</div>
+                            <div class="car-volume">${car.volume.toFixed(1)}л</div>
+                            <div class="car-status">${car.status || ''}</div>
+                        `;
+                    } else {
+                        slotDiv.className = 'slot' + (slotIdx === 2 ? ' service' : '');
+                        slotDiv.innerHTML = slotIdx === 2 ? '<span style="color: #999;">Обслуживание</span>' : '<span style="color: #999;">Пусто</span>';
+                    }
+                });
+            });
+
+            // Update operator
+            const operatorBox = document.getElementById('operatorBox');
+            const operatorCar = document.getElementById('operatorCar');
+            if (state.operator !== null) {
+                operatorBox.className = 'operator-box busy';
+                operatorCar.textContent = `🚗 car${state.operator}`;
+            } else {
+                operatorBox.className = 'operator-box';
+                operatorCar.textContent = 'Свободен';
+            }
+
+            // Update global queue
+            const globalQueueCars = document.getElementById('globalQueueCars');
+            if (state.globalQueue.length === 0) {
+                globalQueueCars.innerHTML = '<div style="color: #999; font-style: italic;">Очередь пуста</div>';
+            } else {
+                globalQueueCars.innerHTML = state.globalQueue.map(carId =>
+                    `<div class="global-queue-car">🚗 car${carId} <div class="car-side">Сторона ${state.cars[carId]?.side || ''}</div></div>`
+                ).join('');
+            }
+
+            // Update queue
+            const queueCars = document.getElementById('queueCars');
+            if (state.paymentQueue.length === 0) {
+                queueCars.innerHTML = '<div style="color: #999; font-style: italic;">Очередь пуста</div>';
+            } else {
+                queueCars.innerHTML = state.paymentQueue.map(carId =>
+                    `<div class="queue-car">🚗 car${carId}</div>`
+                ).join('');
+            }
+
+            // Update info panel
+            document.getElementById('queueLength').textContent = state.paymentQueue.length;
+            document.getElementById('carsProcessed').textContent = state.carsProcessed;
+        }
+
+        // Process event
+        function processEvent(event) {
+            switch (event.type) {
+                case 'ARRIVAL':
+                    state.cars[event.carId] = {
+                        id: event.carId,
+                        volume: event.volume,
+                        side: event.side,
+                        status: 'прибыл'
+                    };
+                    break;
+
+                case 'ASSIGN':
+                    if (event.carId !== null && event.column !== null && event.slot !== null) {
+                        state.columns[event.column].slots[event.slot] = event.carId;
+                        if (state.cars[event.carId]) {
+                            state.cars[event.carId].column = event.column;
+                            state.cars[event.carId].slot = event.slot;
+                            state.cars[event.carId].status = 'ожидает';
+                        }
+                    }
+                    break;
+
+                case 'QUEUE':
+                    if (event.carId !== null && !state.paymentQueue.includes(event.carId)) {
+                        state.paymentQueue.push(event.carId);
+                        if (state.cars[event.carId]) {
+                            state.cars[event.carId].status = 'в очереди';
+                        }
+                    }
+                    break;
+
+                case 'START_PAYMENT':
+                    state.operator = event.carId;
+                    state.paymentQueue = state.paymentQueue.filter(id => id !== event.carId);
+                    if (state.cars[event.carId]) {
+                        state.cars[event.carId].status = 'оплата';
+                    }
+                    break;
+
+                case 'END_PAYMENT':
+                    if (state.operator === event.carId) {
+                        state.operator = null;
+                    }
+                    if (state.cars[event.carId]) {
+                        state.cars[event.carId].status = 'ожидает топливо';
+                    }
+                    break;
+
+                case 'START_FUEL':
+                    if (state.cars[event.carId]) {
+                        state.cars[event.carId].status = 'заправка';
+                    }
+                    break;
+
+                case 'END_FUEL':
+                    if (state.cars[event.carId]) {
+                        const car = state.cars[event.carId];
+                        if (car.column !== undefined && car.slot !== undefined) {
+                            state.columns[car.column].slots[car.slot] = null;
+                        }
+                        delete state.cars[event.carId];
+                        state.carsProcessed++;
+                    }
+                    break;
+
+                case 'MOVE':
+    // Ожидаем: event.slotFrom, event.slotTo, event.column
+    if (event.carId !== null) {
+        const car = state.cars[event.carId];
+        // Определим текущные позиции:
+        const fromCol = (car && car.column !== undefined) ? car.column : null;
+        const fromSlot = (car && car.slot !== undefined) ? car.slot : event.slotFrom;
+
+        const toCol = (event.column !== null) ? event.column : (car ? car.column : null);
+        const toSlot = (event.slotTo !== null) ? event.slotTo : null;
+
+        // Если есть откуда — освободим старое место
+        if (fromCol !== null && fromSlot !== null && state.columns[fromCol]) {
+            // Защита: если там действительно стоит этот carId
+            if (state.columns[fromCol].slots[fromSlot] === event.carId) {
+                state.columns[fromCol].slots[fromSlot] = null;
+            } else {
+                // на всякий случай — ищем и удаляем этот carId в колонке, чтобы не дублировать
+                for (let si = 0; si < state.columns[fromCol].slots.length; si++) {
+                    if (state.columns[fromCol].slots[si] === event.carId) {
+                        state.columns[fromCol].slots[si] = null;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Поместим в новое место (если задана колонка и слот)
+        if (toCol !== null && toSlot !== null && state.columns[toCol]) {
+            // Защита: если место занято — перезаписать (или можно логировать конфликт)
+            state.columns[toCol].slots[toSlot] = event.carId;
+
+            // Обновим данные машины
+            if (car) {
+                car.column = toCol;
+                car.slot = toSlot;
+                car.status = 'перемещен';
+            } else {
+                // если объекта car ещё нет — создадим минимальный
+                state.cars[event.carId] = {
+                    id: event.carId,
+                    column: toCol,
+                    slot: toSlot,
+                    volume: event.volume || 0,
+                    status: 'перемещен'
+                };
+            }
+        } else {
+            // Если не указаны точные координаты, попытаемся поместить в сервисный слот (2)
+            if (toCol !== null && state.columns[toCol]) {
+                state.columns[toCol].slots[2] = event.carId;
+                if (car) {
+                    car.column = toCol;
+                    car.slot = 2;
+                    car.status = 'перемещен';
+                }
+            }
+        }
+    }
+    break;
+
+                case 'TRANSFER_GLOBAL':
+                    // Машина переходит из глобальной очереди в локальную очередь колонки
+                    if (event.carId !== null && event.column !== null && event.slot !== null) {
+                        // Убираем машину из глобальной очереди (если она там есть)
+                        state.globalQueue = state.globalQueue.filter(id => id !== event.carId);
+
+                        // Размещаем машину в указанном слоте колонки
+                        state.columns[event.column].slots[event.slot] = event.carId;
+
+                        // Обновляем данные машины
+                        if (state.cars[event.carId]) {
+                            state.cars[event.carId].column = event.column;
+                            state.cars[event.carId].slot = event.slot;
+                            state.cars[event.carId].status = 'в локальной очереди';
+                        } else {
+                            // Если машины нет в state.cars, создаём её
+                            state.cars[event.carId] = {
+                                id: event.carId,
+                                column: event.column,
+                                slot: event.slot,
+                                volume: event.volume || 0,
+                                status: 'в локальной очереди'
+                            };
+                        }
+                    }
+                    break;
+
+                case 'GLOBAL_QUEUE':
+                    // Машина добавляется в глобальную очередь
+                    if (event.carId !== null) {
+                        state.globalQueue.push(event.carId);
+                        if (state.cars[event.carId]) {
+                            state.cars[event.carId].status = 'в глобальной очереди';
+                        } else {
+                            // Если машины нет в state.cars, создаём её
+                            state.cars[event.carId] = {
+                                id: event.carId,
+                                status: 'в глобальной очереди'
+                            };
+                        }
+                    }
+                    break;
+            }
+
+            // Add to event log
+            const eventList = document.getElementById('eventList');
+            const eventItem = document.createElement('div');
+            eventItem.className = 'event-item';
+            eventItem.innerHTML = `
+                <span class="event-time">${event.time.toFixed(3)}s</span>
+                ${event.description}
+            `;
+            eventList.insertBefore(eventItem, eventList.firstChild);
+
+
+            // Update current time
+            document.getElementById('currentTime').textContent = event.time.toFixed(1) + ' с';
+
+            updateUI();
+        }
+
+        // Update simulation time display
+        function updateSimTime() {
+            document.getElementById('currentTime').textContent = state.currentSimTime.toFixed(1) + ' с';
+        }
+
+        // Realtime mode update
+        function realtimeUpdate() {
+            if (!state.isPlaying || !state.realtimeMode) return;
+
+            const now = performance.now();
+            if (state.lastRealTime !== null) {
+                const deltaRealMs = now - state.lastRealTime;
+                const deltaSimTime = (deltaRealMs / 1000) * state.speed;
+                state.currentSimTime += deltaSimTime;
+                updateSimTime();
+
+                // Process events that should have happened by now
+                while (state.currentEventIndex < events.length &&
+                       events[state.currentEventIndex].time <= state.currentSimTime) {
+                    processEvent(events[state.currentEventIndex]);
+                    state.currentEventIndex++;
+                }
+
+                // Check if we've reached the end
+                if (state.currentEventIndex >= events.length) {
+                    state.isPlaying = false;
+                    document.getElementById('playBtn').textContent = '▶ Воспроизвести';
+                    state.lastRealTime = null;
+                    if (realtimeTimer) {
+                        clearInterval(realtimeTimer);
+                        realtimeTimer = null;
+                    }
+                    return;
+                }
+            }
+
+            state.lastRealTime = now;
+        }
+
+        // Rebuild state up to a specific event index
+        function rebuildStateToIndex(targetIndex) {
+            // Reset state
+            state.cars = {};
+            state.globalQueue = [];
+            state.paymentQueue = [];
+            state.operator = null;
+            state.carsProcessed = 0;
+            state.columns.forEach(col => {
+                col.slots = [null, null, null];
+            });
+
+            document.getElementById('eventList').innerHTML = '';
+
+            // Replay events up to target index
+            for (let i = 0; i < targetIndex; i++) {
+                processEvent(events[i]);
+            }
+
+            // Update simulation time to match the last processed event
+            if (targetIndex > 0 && targetIndex <= events.length) {
+                state.currentSimTime = events[targetIndex - 1].time;
+            } else {
+                state.currentSimTime = 0;
+            }
+            updateSimTime();
+        }
+
+        // Animation loop
+        function animate() {
+            if (!state.isPlaying) return;
+
+            if (state.realtimeMode) {
+                // Realtime mode is handled by realtimeUpdate interval
+                return;
+            }
+
+            if (state.currentEventIndex < events.length) {
+                const event = events[state.currentEventIndex];
+                processEvent(event);
+                state.currentEventIndex++;
+                state.currentSimTime = event.time;
+
+                // Calculate delay based on time difference
+                let delay = 100 / state.speed; // Base delay
+                if (state.currentEventIndex < events.length) {
+                    const nextEvent = events[state.currentEventIndex];
+                    const timeDiff = nextEvent.time - event.time;
+                    delay = Math.min(Math.max(timeDiff * 10 / state.speed, 50), 2000);
+                }
+
+                animationTimer = setTimeout(animate, delay);
+            } else {
+                state.isPlaying = false;
+                document.getElementById('playBtn').textContent = '▶ Воспроизвести';
+            }
+        }
+
+        // Control buttons
+        document.getElementById('playBtn').addEventListener('click', () => {
+            state.isPlaying = !state.isPlaying;
+            if (state.isPlaying) {
+                document.getElementById('playBtn').textContent = '⏸ Воспроизведение...';
+
+                if (state.realtimeMode) {
+                    // Start realtime mode
+                    state.lastRealTime = performance.now();
+                    if (!realtimeTimer) {
+                        realtimeTimer = setInterval(realtimeUpdate, 16); // ~60 FPS
+                    }
+                } else {
+                    // Start event-based mode
+                    animate();
+                }
+            } else {
+                document.getElementById('playBtn').textContent = '▶ Воспроизвести';
+                if (animationTimer) {
+                    clearTimeout(animationTimer);
+                }
+                if (realtimeTimer) {
+                    clearInterval(realtimeTimer);
+                    realtimeTimer = null;
+                }
+                state.lastRealTime = null;
+            }
+        });
+
+        document.getElementById('pauseBtn').addEventListener('click', () => {
+            state.isPlaying = false;
+            document.getElementById('playBtn').textContent = '▶ Воспроизвести';
+            if (animationTimer) {
+                clearTimeout(animationTimer);
+            }
+            if (realtimeTimer) {
+                clearInterval(realtimeTimer);
+                realtimeTimer = null;
+            }
+            state.lastRealTime = null;
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            state.isPlaying = false;
+            document.getElementById('playBtn').textContent = '▶ Воспроизвести';
+            if (animationTimer) {
+                clearTimeout(animationTimer);
+            }
+            if (realtimeTimer) {
+                clearInterval(realtimeTimer);
+                realtimeTimer = null;
+            }
+            state.lastRealTime = null;
+
+            // Reset state
+            state.currentEventIndex = 0;
+            state.currentSimTime = 0;
+            state.cars = {};
+            state.globalQueue = [];
+            state.paymentQueue = [];
+            state.operator = null;
+            state.carsProcessed = 0;
+            state.columns.forEach(col => {
+                col.slots = [null, null, null];
+            });
+
+            document.getElementById('eventList').innerHTML = '';
+            document.getElementById('currentTime').textContent = '0.0 с';
+            updateUI();
+        });
+
+        document.getElementById('speedBtn').addEventListener('click', () => {
+            const speeds = [0.1, 0.5, 1, 1.5, 2, 5, 10];
+            const currentIndex = speeds.indexOf(state.speed);
+            state.speed = speeds[(currentIndex + 1) % speeds.length];
+            document.getElementById('speedBtn').textContent = `⚡ Скорость: ${state.speed}x`;
+            document.getElementById('speedIndicator').textContent = `Скорость: ${state.speed}x`;
+        });
+
+        // Realtime mode toggle button
+        document.getElementById('realtimeBtn').addEventListener('click', () => {
+            const wasPlaying = state.isPlaying;
+
+            // Pause if playing
+            if (wasPlaying) {
+                state.isPlaying = false;
+                if (animationTimer) {
+                    clearTimeout(animationTimer);
+                }
+                if (realtimeTimer) {
+                    clearInterval(realtimeTimer);
+                    realtimeTimer = null;
+                }
+                state.lastRealTime = null;
+            }
+
+            // Toggle mode
+            state.realtimeMode = !state.realtimeMode;
+
+            // Update button appearance
+            const btn = document.getElementById('realtimeBtn');
+            if (state.realtimeMode) {
+                btn.textContent = '⏱ Режим: Реальное время';
+                btn.classList.add('active');
+            } else {
+                btn.textContent = '⏱ Режим: События';
+                btn.classList.remove('active');
+            }
+
+            // Resume if was playing
+            if (wasPlaying) {
+                state.isPlaying = true;
+                if (state.realtimeMode) {
+                    state.lastRealTime = performance.now();
+                    if (!realtimeTimer) {
+                        realtimeTimer = setInterval(realtimeUpdate, 16);
+                    }
+                } else {
+                    animate();
+                }
+            }
+        });
+
+        // Step buttons
+        document.getElementById('stepBackBtn').addEventListener('click', () => {
+            if (state.currentEventIndex > 0) {
+                state.isPlaying = false;
+                document.getElementById('playBtn').textContent = '▶ Воспроизвести';
+                if (animationTimer) {
+                    clearTimeout(animationTimer);
+                }
+                state.currentEventIndex--;
+                rebuildStateToIndex(state.currentEventIndex);
+            }
+        });
+
+        document.getElementById('stepForwardBtn').addEventListener('click', () => {
+            if (state.currentEventIndex < events.length) {
+                state.isPlaying = false;
+                document.getElementById('playBtn').textContent = '▶ Воспроизвести';
+                if (animationTimer) {
+                    clearTimeout(animationTimer);
+                }
+                processEvent(events[state.currentEventIndex]);
+                state.currentEventIndex++;
+            }
+        });
+
+        // Initialize
+        initializeUI();
+        updateUI();
+    </script>
+</body>
+</html>

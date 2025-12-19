@@ -1,0 +1,42 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: spp-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=spp_db
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: spp-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - CLIENT_URLS=http://localhost:8080
+      - MONGODB_URI=mongodb://mongodb:27017/spp_db
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:5000/api
+    container_name: spp-frontend
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:

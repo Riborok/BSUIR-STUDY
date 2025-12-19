@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start-server": "node src/index.js",
+    "dev-server": "nodemon src/index.js",
+    "seed": "node src/data/seed.js",
+    "drop-indexes": "node src/data/drop-indexes.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.1",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
